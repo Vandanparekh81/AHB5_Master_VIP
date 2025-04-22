@@ -13,17 +13,6 @@
 # //  18 U.S.C. Section 1905.
 # //
 # OpenFile vsim.wlf
-add wave -position insertpoint vsim:/ahb5_top/intf/*
-add wave -position insertpoint  \
-vsim:/ahb5_top/intf/Hwrite \
-vsim:/ahb5_top/intf/Hwdata \
-vsim:/ahb5_top/intf/Htrans \
-vsim:/ahb5_top/intf/Hsize \
-vsim:/ahb5_top/intf/Hsel \
-vsim:/ahb5_top/intf/Hresp \
-vsim:/ahb5_top/intf/HResetn \
-vsim:/ahb5_top/intf/Hready \
-vsim:/ahb5_top/intf/Hrdata \
-vsim:/ahb5_top/intf/Hclk \
-vsim:/ahb5_top/intf/Hburst \
-vsim:/ahb5_top/intf/Haddr
+# add wave -r /*
+find drivers -source -time {6 ns} -chasex vsim:/ahb5_top/intf/Hwdata
+find drivers -source -time {121 ns} -cause vsim:/ahb5_top/intf/Haddr

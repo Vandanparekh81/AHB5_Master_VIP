@@ -1,5 +1,5 @@
-# vsim -c -assertdebug -msgmode both -coverage work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all" 
-# Start time: 11:30:56 on Apr 19,2025
+# vsim -c -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all" 
+# Start time: 19:29:25 on Apr 22,2025
 # //  Questa Sim
 # //  Version 2021.2_1 linux May 15 2021
 # //
@@ -20,49 +20,29 @@
 # Loading work.ahb5_interface(fast__2)
 # Loading work.ahb5_test(fast)
 # Loading work.ahb5_interface(fast)
+# ** Warning: (vsim-8441) Clocking block output intf.cb_master.Hwdata is not legal in this
+# or another expression.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_driver.sv Line: 17
+# ** Warning: (vsim-8441) Clocking block output intf.cb_master.Hwrite is not legal in this
+# or another expression.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_driver.sv Line: 21
 # ** Warning: (vsim-8637) A modport ('ahb5_driver') should not be used in a hierarchical path.
-#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_environment.sv Line: 23
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_environment.sv Line: 25
 # ** Warning: (vsim-8637) A modport ('ahb5_monitor') should not be used in a hierarchical path.
-#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_environment.sv Line: 24
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_environment.sv Line: 26
 # ** Warning: (vsim-3764) Stand-alone call to function 'display' treated as implicit void cast.
 #    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_generator.sv Line: 17
 # ** Warning: (vsim-3764) Stand-alone call to function 'display' treated as implicit void cast.
-#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_driver.sv Line: 16
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_driver.sv Line: 25
+# ** Warning: (vsim-3764) Stand-alone call to function 'display' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_driver.sv Line: 30
 # ** Warning: (vsim-3764) Stand-alone call to function 'display' treated as implicit void cast.
 #    Time: 0 ns  Iteration: 0  Region: /ahb5_top_sv_unit File: ../sv/ahb5_monitor.sv Line: 42
 # add wave -r /*
 #  run -all
 # Display Function called from generator class
-# Time = 0 | Hwdata = 0x949664bd | Haddr =  0x21684fff | Hrdata = 0xx | Htrans = 0x0 | Hwrite = 0x1 | Hsize = 0x7 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x0 
-# Display Function called from Monitor class
-# Time = 5 | Hwdata = 0xx | Haddr =  0xx | Hrdata = 0xx | Htrans = 0xx | Hwrite = 0xx | Hsize = 0xx | Hburst = 0xx | Hresp = 0xx | Hsel = 0xX 
-# Display Function called from driver class
-# Time = 5 | Hwdata = 0x949664bd | Haddr =  0x21684fff | Hrdata = 0xx | Htrans = 0x0 | Hwrite = 0x1 | Hsize = 0x7 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x0 
-# Display Function called from generator class
-# Time = 5 | Hwdata = 0x6b9e1045 | Haddr =  0x3e2c908a | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from Monitor class
-# Time = 15 | Hwdata = 0x949664bd | Haddr =  0x21684fff | Hrdata = 0xx | Htrans = 0x0 | Hwrite = 0x1 | Hsize = 0x7 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x0 
-# Display Function called from driver class
-# Time = 15 | Hwdata = 0x6b9e1045 | Haddr =  0x3e2c908a | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from generator class
-# Time = 15 | Hwdata = 0x29570f73 | Haddr =  0x798525e3 | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x0 | Hsize = 0x2 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from Monitor class
-# Time = 25 | Hwdata = 0x6b9e1045 | Haddr =  0x3e2c908a | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from driver class
-# Time = 25 | Hwdata = 0x29570f73 | Haddr =  0x798525e3 | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x0 | Hsize = 0x2 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from generator class
-# Time = 25 | Hwdata = 0x640aa862 | Haddr =  0xbd67974a | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x5 | Hburst = 0x6 | Hresp = 0xx | Hsel = 0x2 
-# Display Function called from Monitor class
-# Time = 35 | Hwdata = 0x29570f73 | Haddr =  0x798525e3 | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x0 | Hsize = 0x2 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x1 
-# Display Function called from driver class
-# Time = 35 | Hwdata = 0x640aa862 | Haddr =  0xbd67974a | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x5 | Hburst = 0x6 | Hresp = 0xx | Hsel = 0x2 
-# Display Function called from generator class
-# Time = 35 | Hwdata = 0x2eb9bf95 | Haddr =  0xfb0aca77 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x5 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x2 
-# Display Function called from Monitor class
-# Time = 45 | Hwdata = 0x640aa862 | Haddr =  0xbd67974a | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x5 | Hburst = 0x6 | Hresp = 0xx | Hsel = 0x0 
-# Display Function called from driver class
-# Time = 45 | Hwdata = 0x2eb9bf95 | Haddr =  0xfb0aca77 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x5 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x2 
-# ** Note: $finish    : /home/vandan-parekh/Downloads/sv_lab/AHB5_Master_VIP/tb_top/ahb5_top.sv(15)
-#    Time: 50 ns  Iteration: 0  Instance: /ahb5_top
-# End time: 11:31:10 on Apr 19,2025, Elapsed time: 0:00:14
-# Errors: 0, Warnings: 5
+# Time = 0 | Hwdata = 0xa3129c1e | Haddr =  0xf3957c7b | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x0 | Hsize = 0x1 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# ** Note: $finish    : ../tb_top/ahb5_top.sv(16)
+#    Time: 5 ns  Iteration: 0  Instance: /ahb5_top
+# End time: 19:29:34 on Apr 22,2025, Elapsed time: 0:00:09
+# Errors: 0, Warnings: 8

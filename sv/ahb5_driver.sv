@@ -13,28 +13,42 @@ class ahb5_driver;
       ahb5_transaction trans;
       @(intf.cb_master);
       gen2drv.get(trans);
-      trans.display("driver");
-
-      /*if(intf.HResetn == 0) begin
-      intf.Hwdata <= 0;
-      intf.Haddr <= 0;
-      intf.Htrans <= 0;
-      intf.Hburst <= 0;
-      intf.Hwrite <= 0;
-      intf.Hsize <= 0;
-      intf.Hsel <= 0;
-      $display("Reset is initiated so all the value is passing zero");
-      trans.display("Driver");
+      if(intf.HResetn == 0) begin
+        intf.cb_master.Hwdata <= 0;
+        intf.cb_master.Haddr <= 0;
+        intf.cb_master.Htrans <= 0;
+        intf.cb_master.Hburst <= 0;
+        intf.cb_master.Hwrite <= 0;
+        intf.cb_master.Hsize <= 0;
+        intf.cb_master.Hsel <= 0;
+        $display("Reset is initiated so all the value is passing zero");
+        trans.display("Driver");
+        wait(intf.HResetn);
       end
-      else begin*/
-      intf.cb_master.Hwdata <= trans.Hwdata;
-      intf.cb_master.Haddr <= trans.Haddr;
-      intf.cb_master.Htrans <= trans.Htrans;
-      intf.cb_master.Hwrite <= trans.Hwrite;
-      intf.cb_master.Hsize <= trans.Hsize;
-      intf.cb_master.Hsel <= trans.Hsel;
-      intf.cb_master.Hburst <= trans.Hburst;
-      //end
+
+      else begin
+        trans.display("driver"); 
+        //intf.cb_master.Hwdata <= trans.Hwdata;
+        intf.cb_master.Haddr <= trans.Haddr;
+        intf.cb_master.Htrans <= trans.Htrans;
+        intf.cb_master.Hwrite <= trans.Hwrite;
+        intf.cb_master.Hsize <= trans.Hsize;
+        intf.cb_master.Hsel <= trans.Hsel;
+        intf.cb_master.Hburst <= trans.Hburst;
+      end
+
+      $display("Time = %0t Hello",$time);
+
+      do 
+        @(intf.cb_master);
+      while(!intf.cb_master.Hready);
+      $display("Time = %0t Hello22",$time);
+
+      if(intf.cb_master.Hwrite) begin
+        intf.cb_master.Hwdata <= trans.Hwdata;
+        $display("222222222222222222222222222222222Time = %0t | intf.cb_master.Hwdata = %0h", $time, intf.cb_master.Hwdata);
+      end
+
 
     end
   endtask

@@ -3,12 +3,14 @@
 `include "ahb5_driver.sv"
 `include "ahb5_monitor.sv"
 `include "ahb5_scoreboard.sv"
+`include "../sve/ahb5_slave_dummy_driver.sv"
 class ahb5_environment;
   ahb5_generator gen;
   ahb5_driver drv;
   ahb5_transaction trans;
   ahb5_monitor mon;
   ahb5_scoreboard scb;
+  ahb5_slave_dummy_driver dum_drv;
   mailbox gen2drv;
   mailbox mon2scb;
   virtual ahb5_interface intf;
@@ -23,6 +25,7 @@ class ahb5_environment;
     drv = new(gen2drv, intf.ahb5_driver);
     mon = new(mon2scb, intf.ahb5_monitor, event_a);
     scb = new(mon2scb);
+    dum_drv = new(intf);
   endfunction
 
   task test_run();
@@ -31,6 +34,7 @@ class ahb5_environment;
       drv.main();
       mon.main();
       scb.main();
+      dum_drv.main();
     join
   endtask
 

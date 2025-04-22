@@ -12,6 +12,7 @@ module ahb5_top;
     HResetn = 1; 
     $dumpfile("AHB5_Wave.vcd");
     $dumpvars(0,ahb5_top);
-    #50 $finish;
+    #500;
+    $finish;
   end
 endmodule
