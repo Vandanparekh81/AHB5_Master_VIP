@@ -1,4 +1,5 @@
-path += ../tb_top/ahb5_top.sv
+#path += ../tb_top/ahb5_top.sv
+path += ../sv/ahb5_package.sv
 #path += ../sv/ahb5_transaction.sv
 #path += ../sv/ahb5_Interface.sv
 #path += ../sv/ahb5_environment.sv
@@ -23,7 +24,7 @@ compile:
 sim:
 	@vopt work.ahb5_top -o tb_opt +acc=arn
 	@vsim -c  -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all"
-	#@mv $(log) ../sim/
+	#@mv -f $(log) ../sim/
 wave: 
 	@vsim vsim.wlf -do "add wave -r /*"
 
