@@ -1,4 +1,4 @@
-
+import ahb5_pkg::*;
 class ahb5_monitor;
   mailbox mon2scb;
   event event_a;
@@ -17,17 +17,21 @@ class ahb5_monitor;
       ahb5_transaction trans;
       trans = new();
       //$display("Time = %0t Hemlooo", $time);
-      @(intf.cb_monitor);
+      @(intf.cb_monitor.Hwdata or intf.cb_monitor.Hrdata);
       //$display("Time = %0t Hemlooo 322", $time);
-      trans.Hwdata = intf.cb_monitor.Hwdata;
+
       //$display("Time = %0t Hemlooo 422", $time);
       trans.Haddr = intf.cb_monitor.Haddr;
       //$display("Time = %0t Hemlooo 522", $time);
-      trans.Hrdata = intf.cb_monitor.Hrdata;
       //$display("Time = %0t Hemlooo 622", $time);
       trans.Htrans = intf.cb_monitor.Htrans;
       //$display("Time = %0t Hemlooo 722", $time);
+
       trans.Hwrite = intf.cb_monitor.Hwrite;
+      if(trans.Hwrite)
+        trans.Hwdata = intf.cb_monitor.Hwdata;
+      else 
+        trans.Hrdata = intf.cb_monitor.Hrdata;
       //$display("Time = %0t Hemlooo 822", $time);
       trans.Hsize = intf.cb_monitor.Hsize;
       //$display("Time = %0t Hemlooo 922", $time);

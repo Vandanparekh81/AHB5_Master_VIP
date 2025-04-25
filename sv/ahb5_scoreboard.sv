@@ -1,3 +1,4 @@
+import ahb5_pkg::*;
 class ahb5_scoreboard;
         mailbox mon2scb;
 

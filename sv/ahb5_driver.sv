@@ -1,3 +1,4 @@
+import ahb5_pkg::*;
 class ahb5_driver;
   mailbox gen2drv;
   virtual ahb5_interface.ahb5_driver intf;

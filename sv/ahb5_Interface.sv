@@ -1,4 +1,5 @@
-interface ahb5_interface #(parameter DATA_WIDTH = 32, parameter ADDR_WIDTH = 32) // Support 8 to 1024 bitts
+import ahb5_pkg::*;
+interface ahb5_interface // Support 8 to 1024 bitts
   (
     input logic Hclk,
     input logic HResetn
