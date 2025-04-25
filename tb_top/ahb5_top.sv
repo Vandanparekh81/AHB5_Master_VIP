@@ -1,8 +1,11 @@
-`include "../sv/ahb5_Interface.sv"
-`include "../sve/ahb5_test.sv"
+//`include "../sv/ahb5_Interface.sv"
+//`include "../sve/ahb5_test.sv"
+
+import ahb5_pkg::*;
 
 module ahb5_top;
   logic Hclk, HResetn;
+
   ahb5_interface intf(Hclk, HResetn);
   ahb5_test tst(intf);
   initial forever #5 Hclk = ~Hclk;
