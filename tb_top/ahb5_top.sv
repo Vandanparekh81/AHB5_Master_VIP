@@ -10,9 +10,11 @@ module ahb5_top;
   ahb5_test tst(intf);
   initial forever #5 Hclk = ~Hclk;
 
-  initial begin
+
+  initial begin 
     Hclk = 0;
-    HResetn = 1; 
+    HResetn = 1;
+    //#100 HResetn = 0;
     $dumpfile("AHB5_Wave.vcd");
     $dumpvars(0,ahb5_top);
     #500;
