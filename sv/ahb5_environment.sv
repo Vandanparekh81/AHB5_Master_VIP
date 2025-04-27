@@ -14,7 +14,6 @@ class ahb5_environment;
   ahb5_transaction trans;
   ahb5_monitor mon;
   ahb5_scoreboard scb;
-  ahb5_slave_dummy_driver dum_drv;
   mailbox gen2drv;
   mailbox mon2scb;
   testcase_t testcase;
@@ -22,20 +21,21 @@ class ahb5_environment;
   int no_of_wr;
   int no_of_rd;
   event event_a;
+  int no_of_random;
 
 
-  function new(virtual ahb5_interface intf, int no_of_wr, int no_of_rd, testcase_t testcase);
+  function new(virtual ahb5_interface intf, int no_of_wr, int no_of_rd, int no_of_random, testcase_t testcase);
     this.no_of_wr = no_of_wr;
     this.no_of_rd = no_of_rd;
     this.testcase = testcase;
+    this.no_of_random = no_of_random;
     this.intf = intf;
     gen2drv = new(1);
     mon2scb = new(1);
-    gen = new(gen2drv, no_of_wr, no_of_rd, testcase, event_a);
+    gen = new(gen2drv, no_of_wr, no_of_rd, no_of_random, testcase, event_a);
     drv = new(gen2drv, intf.ahb5_driver);
     mon = new(mon2scb, intf.ahb5_monitor, event_a);
     scb = new(mon2scb);
-    dum_drv = new(intf);
   endfunction
 
   task test_run();
@@ -44,7 +44,6 @@ class ahb5_environment;
       drv.main();
       mon.main();
       scb.main();
-      dum_drv.main();
     join
   endtask
 
