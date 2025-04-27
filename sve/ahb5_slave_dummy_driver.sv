@@ -1,9 +1,9 @@
 import ahb5_pkg::*;
 class ahb5_slave_dummy_driver;
-  logic [31:0] Hrdata;
+  logic [DATA_WIDTH-1:0] Hrdata;
   logic Hresp;
   logic Hready;
-  logic [63:0] mem [*];
+  logic [DATA_WIDTH-1:0] mem [*];
   ahb5_transaction trans;
   virtual ahb5_interface intf;
 
@@ -19,15 +19,22 @@ class ahb5_slave_dummy_driver;
       intf.Hready <= Hready;
 
       @(posedge intf.Hclk);
-      if(intf.Hwrite == 1 && intf.Hready == 1 && intf.Htrans != 0) begin
+      //if(intf.Hwrite == 1 && intf.Hready == 1 && intf.Htrans != 0) begin
+      if(intf.Hwrite == 1 && intf.Hready == 1) begin
         mem[intf.Haddr] = intf.Hwdata;
         intf.Hresp = 0;
-        $display("656565556565565 TIme = %0t | memory = %0h | memory without address = %p ", $time, mem[intf.Haddr], mem);
+        $display("---------------------------------------------------------------------------------");
+        $display("WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = %0t | memory = %0h | memory without address = %p | At slave dummy Haddr = %0h | At slave dummy decimal Haddr = %0d", $time, mem[intf.Haddr], mem, intf.Haddr, intf.Haddr);
+        $display("---------------------------------------------------------------------------------");
       end
 
-      if(intf.Hwrite == 0 && intf.Hready == 0 && intf.Htrans != 0) begin
+      //if(intf.Hwrite == 0 && intf.Hready == 0 && intf.Htrans != 0) begin
+      if(intf.Hwrite == 0 && intf.Hready == 1) begin
         intf.Hrdata <= mem[intf.Haddr];
         intf.Hresp =  0;
+        $display("---------------------------------------------------------------------------------");
+        $display("READ OPERATION INSIDE SLAVE DUMMY DRIVER TIme = %0t | memory = %0h | memory without address = %p | At slave dummy Haddr = %0h | At slave dummy decimal Haddr = %0d", $time, mem[intf.Haddr], mem, intf.Haddr, intf.Haddr);
+        $display("---------------------------------------------------------------------------------");
       end
       if(intf.Hresp == 0)
               intf.Hready = 1;
