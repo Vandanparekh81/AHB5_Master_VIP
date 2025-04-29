@@ -15,8 +15,8 @@ module ahb5_top;
     Hclk = 0;
     HResetn = 1;
     //#100 HResetn = 0;
-    $dumpfile("AHB5_Wave.vcd");
-    $dumpvars(0,ahb5_top);
+    //$dumpfile("AHB5_Wave.vcd");
+    //$dumpvars(0,ahb5_top);
     #500;
     $finish;
   end
