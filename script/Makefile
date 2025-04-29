@@ -8,28 +8,40 @@ path += ../sv/ahb5_package.sv
 #path += ../sv/ahb5_scoreboard.sv
 #path += ../sv/ahb5_generator.sv
 #path += ../sv/ahb5_driver.sv
-log += ../script/*vcd
+SIM_DIR = ../sim/
+#log += ../script/*.vcd
 log += ../script/transcript
 #log +=*vstf
-log += ../script/*wlf
+log += ../script/*.wlf
 log += ../script/work
-log += ../script/*log
-	
-all:compile sim wave
+#log += ../script/.log
+override WAVES ?=0
+override SEED ?=100 
+
+all:compile sim wave move
 compile_with_vsim:compile sim
 	
 compile:
 	@echo "compiling...."
+	#+STRING=DIRECTED_TESTCASE
 	@vlog $(path)
 sim:
+	#+STRING=DIRECTED_TESTCASE
 	@vopt work.ahb5_top -o tb_opt +acc=arn
-	@vsim -c  -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all"
+	#@vsim -c  -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all"
 	#@mv -f $(log) ../sim/
-wave: 
-	@vsim vsim.wlf -do "add wave -r /*"
+wave:
+ifeq ($(WAVES),1)
+	#+STRING=DIRECTED_TESTCASE
+	vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -l $(SIM_DIR)/ahb_m.log -do "add wave -r /*; run -all"
+	vsim vsim.wlf -do "add wave -r /*"
+else
+	#+STRING=DIRECTED_TESTCASE
+	vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -do "run -all"
+endif
 
-#run:  
-	#@run -all
+move:  
+	@rm -rf $(SIM_DIR)/work
+	@mv $(log) $(SIM_DIR)
 clean:
-	@rm -rf work
-	#@rm -rf $(log) ../sim/
+	@rm -rf $(log) ../sim/
