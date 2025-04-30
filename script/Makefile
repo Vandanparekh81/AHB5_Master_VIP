@@ -9,39 +9,55 @@ path += ../sv/ahb5_package.sv
 #path += ../sv/ahb5_generator.sv
 #path += ../sv/ahb5_driver.sv
 SIM_DIR = ../sim/
+LOG = log
+Log = ./log/
+override TEST_NAME ?=0
 #log += ../script/*.vcd
-log += ../script/transcript
 #log +=*vstf
-log += ../script/*.wlf
-log += ../script/work
+
+WORK += ../script/work
 #log += ../script/.log
 override WAVES ?=0
-override SEED ?=100 
 
-all:compile sim wave move
+ifeq ($(WAVES),1)
+	wlf += ../script/*.wlf
+endif
+override SEED ?=100 
+ifeq ($(TEST_NAME),0)
+	DIRECTORY = SANITY_TESTCASE
+endif
+ifeq ($(TEST_NAME),1)
+	DIRECTORY = DIRECTED_TESTCASE
+endif
+ifeq ($(TEST_NAME),2)
+	DIRECTORY = RANDOM_TESTCASE
+endif
+all:compile sim move
 compile_with_vsim:compile sim
 	
 compile:
 	@echo "compiling...."
-	#+STRING=DIRECTED_TESTCASE
 	@vlog $(path)
 sim:
-	#+STRING=DIRECTED_TESTCASE
 	@vopt work.ahb5_top -o tb_opt +acc=arn
 	#@vsim -c  -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all"
 	#@mv -f $(log) ../sim/
-wave:
 ifeq ($(WAVES),1)
-	#+STRING=DIRECTED_TESTCASE
-	vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -l $(SIM_DIR)/ahb_m.log -do "add wave -r /*; run -all"
-	vsim vsim.wlf -do "add wave -r /*"
+	#vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -l $(SIM_DIR)/test_name_$(SEED).log -do "add wave -r /*; run -all"
+	mkdir -p $(SIM_DIR)$(LOG)
+	mkdir -p $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)
+	vsim -c -assertdebug work.tb_opt +STRING=$(TEST_NAME) -sv_seed $(SEED) -l $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "add wave -r /*; run -all"
 else
-	#+STRING=DIRECTED_TESTCASE
-	vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -do "run -all"
+	mkdir -p $(SIM_DIR)$(LOG)
+	mkdir -p $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)
+	vsim -c -assertdebug work.tb_opt +STRING=$(TEST_NAME) -sv_seed $(SEED) -l $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "run -all"
 endif
 
 move:  
-	@rm -rf $(SIM_DIR)/work
-	@mv $(log) $(SIM_DIR)
+	#@rm -rf $(SIM_DIR)/work
+ifeq ($(WAVES),1)
+	@mv $(wlf) $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).wlf
+endif
 clean:
-	@rm -rf $(log) ../sim/
+	@rm -rf $(WORK)
+	
