@@ -7,17 +7,17 @@ program ahb5_test(ahb5_interface intf);
   int no_of_random=6;
   ahb5_environment env;
   ahb5_slave_dummy_driver dum_drv;
-  /*initial begin
+  initial begin
     if($value$plusargs ("STRING=%s", testcase))
             $display("%s This testcase is selected", testcase);
-  end*/
+  end
   initial begin
     forever @(negedge intf.HResetn) begin
       env.drv.reset();
     end
   end
   initial begin
-    env = new(intf, no_of_wr, no_of_rd, no_of_random, testcase);
+    env = new(intf, no_of_wr, no_of_rd, no_of_random, testcase);    
     dum_drv = new(intf);
     fork
       env.test_run();
