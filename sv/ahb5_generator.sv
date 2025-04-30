@@ -18,14 +18,25 @@ class ahb5_generator;
 
      this.event_a = event_a;
   endfunction
+  
+  //Common Testcase Body For SANITY, DIRECTED, RANDOM
+  //int no_of_tr = for write operation how many write operation you want to perform 
+  //bit random = you want to randomize Hwrite For RANDOM_TESTCASE
+  //string test_name = this variable for display function for our understanding 
+  //string test_name = let's assume you perform DIRECTED then how you know for that you have to pass testcase name in place of z when you call task
+  task testcase_body(int no_of_tr, bit wr_rd, bit random, string test_name );
+    repeat(no_of_tr) begin
+      if(random == 0) begin
+        trans.Hwrite = wr_rd;
+      end
 
-  task testcase_body(int x, bit j, bit k, string z);
-    repeat(x) begin
-      trans.Hwrite = $urandom_range(j,k);
+      else begin
+        trans.Hwrite = $urandom_range(0,1);
+      end
       trans.randomize();
       gen2drv.put(trans);
-      trans.display(z);
-      #9;
+      trans.display(test_name);
+      @(event_a.triggered);
     end
   endtask
 
@@ -33,11 +44,11 @@ class ahb5_generator;
     trans = new();
     case(testcase) 
       DIRECTED_TESTCASE: begin
-        testcase_body(no_of_wr, 1, 1, "Directed Write case in Generator");
+        testcase_body(no_of_wr, 1, 0, "Directed Write case in Generator");
         testcase_body(no_of_rd, 0, 0, "Directed Read case in Generator");
       end
       SANITY_TESTCASE: begin
-        testcase_body(1, 1, 1, "Sanity Write Testcase");
+        testcase_body(1, 1, 0, "Sanity Write Testcase");
         testcase_body(1, 0, 0, "Sanity Read Testcase");
       end
       RANDOM_TESTCASE:  begin

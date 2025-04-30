@@ -34,7 +34,7 @@ class ahb5_environment;
     mon2scb = new(1);
     gen = new(gen2drv, no_of_wr, no_of_rd, no_of_random, testcase, event_a);
     drv = new(gen2drv, intf.ahb5_driver);
-    mon = new(mon2scb, intf.ahb5_monitor, event_a);
+    mon = new(mon2scb, intf, event_a);
     scb = new(mon2scb);
   endfunction
 

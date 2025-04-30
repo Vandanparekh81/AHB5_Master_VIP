@@ -47,12 +47,13 @@ class ahb5_driver;
           //$display("Time = %0t Hello22",$time);
         end
         begin
+          @(posedge intf.Hclk);
           if(trans.Hwrite) begin
             @(posedge intf.Hclk);
             while(!intf.cb_master.Hready) @(posedge intf.Hclk);
             if(intf.cb_master.Hready) begin
               intf.cb_master.Hwdata <= trans.Hwdata;
-              $display("222222222222222222222222222222222Time = %0t | intf.cb_master.Hwdata = %0h", $time, intf.cb_master.Hwdata);
+              $display("222 Time = %0t | intf.cb_master.Hwdata = %0h", $time, intf.cb_master.Hwdata);
             end
           end
           trans.display("driver");
