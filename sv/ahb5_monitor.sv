@@ -23,17 +23,12 @@ class ahb5_monitor;
       ahb5_transaction trans;
       trans = new();
       $display("Time = %0t debugging display", $time);
-      $display("Time = %0t debugging display 322", $time);
-
-      $display("Time = %0t debugging display 422", $time);
-      // @(posedge intf.Hclk);
-      $display("Time = %0t debugging display 522", $time);
-      @(intf.Hwdata or intf.Hrdata);
+      //@(posedge intf.Hclk);
+      @(negedge intf.Hclk);
       trans.Haddr = intf.Haddr;
       $display("Time = %0t debugging display 622", $time);
       trans.Htrans = intf.Htrans;
       $display("Time = %0t debugging display 722", $time);
-
       trans.Hwrite = intf.Hwrite;
       $display("Time = %0t debugging display 822", $time);
       trans.Hsize = intf.Hsize;
@@ -48,17 +43,23 @@ class ahb5_monitor;
       $display("Time = %0t debugging display 1422", $time);
       if(intf.Hwrite == 1) begin
         $display("Time = %0t debugging display 1522", $time);
+        @(negedge intf.Hclk);
         trans.Hwdata = intf.Hwdata;
         trans.display("Write Monitor");
       end
       else begin 
         $display("Time = %0t debugging display 1622", $time);
+        @(negedge intf.Hclk);
         trans.Hrdata = intf.Hrdata;
         trans.display("Read Monitor");
       end
+      $display("[%0t] Debugging Display 111 of Monitor ", $time);
       trans.display("Outside Monitor");
+      $display("[%0t] Debugging Display 222 of Monitor ", $time);
       mon2scb.put(trans);
+      $display("[%0t] Debugging Display 333 of Monitor ", $time);
       ->event_a; 
+      $display("[%0t] Debugging Display 444 of Monitor ", $time);
       end
   endtask
 endclass      

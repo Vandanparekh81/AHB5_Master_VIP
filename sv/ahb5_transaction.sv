@@ -27,6 +27,7 @@ class ahb5_transaction;
                           //if((Haddr >= (((2**DATA_WIDTH)/3)+ ((2**DATA_WIDTH)/3))) && (Haddr <= ((2**DATA_WIDTH)- 1))) Hsel == 2'b10;
                          //}
   //constraint HWrite {if(testcase == WRITE_TEST) Hwrite == 1; if(testcase == READ_TEST) Hwrite == 0; }
+  constraint Htrans_state{Htrans == 2;}
   constraint Address {Hwrite -> !(Haddr inside {Haddr_mem}); !Hwrite -> (Haddr inside {Haddr_mem}); }
 
   constraint HSelect {Hsel inside {0,1,2};}

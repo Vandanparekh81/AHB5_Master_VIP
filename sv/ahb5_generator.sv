@@ -35,8 +35,11 @@ class ahb5_generator;
       end
       trans.randomize();
       gen2drv.put(trans);
+      $display("[%0t] Debugging Display 111 of Generator ", $time);
       trans.display(test_name);
-      @(event_a.triggered);
+      $display("[%0t] Debugging Display 222 of Generator ", $time);
+      #20;
+      $display("[%0t] Debugging Display 333 of Generator ", $time);
     end
   endtask
 
