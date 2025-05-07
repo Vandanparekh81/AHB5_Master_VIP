@@ -12,11 +12,6 @@ program ahb5_test(ahb5_interface intf);
             $display("%s This testcase is selected", testcase);
   end
   initial begin
-    forever @(negedge intf.HResetn) begin
-      env.drv.reset();
-    end
-  end
-  initial begin
     env = new(intf, no_of_wr, no_of_rd, no_of_random, testcase);    
     dum_drv = new(intf);
     fork
