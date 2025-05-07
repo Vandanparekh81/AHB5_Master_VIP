@@ -1,0 +1,188 @@
+# vsim -c -assertdebug work.tb_opt "+STRING=0" -sv_seed 455 -l ../sim//./log//SANITY_TESTCASE_455/SANITY_TESTCASE_455.log -do "add wave -r /*; run -all" 
+# Start time: 16:19:54 on Apr 30,2025
+# //  Questa Sim
+# //  Version 2021.2_1 linux May 15 2021
+# //
+# //  Copyright 1991-2021 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.ahb5_interface(fast)
+# Loading work.ahb5_pkg(fast)
+# Loading work.ahb5_package_sv_unit(fast)
+# Loading work.ahb5_top(fast)
+# Loading work.ahb5_interface(fast__2)
+# Loading work.ahb5_test(fast)
+# ** Warning: (vsim-8441) Clocking block output intf.cb_master.Hwdata is not legal in this
+# or another expression.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_pkg File: ../sv/ahb5_driver.sv Line: 55
+# ** Warning: (vsim-8637) A modport ('ahb5_driver') should not be used in a hierarchical path.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_pkg File: ../sv/ahb5_environment.sv Line: 36
+# add wave -r /*
+#  run -all
+# SANITY_TESTCASE This testcase is selected
+# ------------------------------------------------------
+# Display Function called from Sanity Write Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 0 | Hwdata = 0x8d3b5fdc85444ff0 | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 0 | Haddr_mem = '{4161997671:4161997671 }
+# -------------------------------------------------------
+# Time = 0 Hello
+# Time = 0 debugging display
+# Time = 0 debugging display 322
+# Time = 0 debugging display 422
+# Time = 0 debugging display 522
+# 11-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 0, intf.Hwrite = x, intf.Hready = x
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# 22-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 5, intf.Hwrite = x, intf.Hready = x
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# 222 Time = 15 | intf.cb_master.Hwdata = 8d3b5fdc85444ff0
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 15 | Hwdata = 0x8d3b5fdc85444ff0 | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 15 | Haddr_mem = '{4161997671:4161997671 }
+# -------------------------------------------------------
+# 33-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 15, intf.Hwrite = 1, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 15 debugging display 622
+# Time = 15 debugging display 722
+# Time = 15 debugging display 822
+# Time = 15 debugging display 922
+# Time = 15 debugging display 1122
+# Time = 15 debugging display 1222
+# Time = 15 debugging display 1322
+# Time = 15 debugging display 1422
+# Time = 15 debugging display 1522
+# ------------------------------------------------------
+# Display Function called from Write Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 15 | Hwdata = 0x8d3b5fdc85444ff0 | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0x1
+# Time = 15 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Outside Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 15 | Hwdata = 0x8d3b5fdc85444ff0 | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0x1
+# Time = 15 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Time = 15 debugging display
+# Time = 15 debugging display 322
+# Time = 15 debugging display 422
+# Time = 15 debugging display 522
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 15 | memory = 8d3b5fdc85444ff0 | memory without address = '{4161997671:10176833183707058160 } | At slave dummy Haddr = f8130b67 | At slave dummy decimal Haddr = 4161997671
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 15, intf.Hwrite = 1, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# 11-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 15, intf.Hwrite = 1, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Sanity Read Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 15 | Hwdata = 0x8474700db938f41e | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x0 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 15 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Memory is Filled with Hwdata
+# ------------------------------------------------------
+# Display Function called from Scoreboard Classs class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 15 | Hwdata = 0x8d3b5fdc85444ff0 | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x3 | Hwrite = 0x1 | Hsize = 0x4 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x0 | Hready = 0x1
+# Time = 15 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Total pass count = 0
+# Total fail count = 0
+# Total transaction count = 1
+# Time = 15 Hello
+# 22-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 25, intf.Hwrite = 0, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 25 | Hwdata = 0x8474700db938f41e | Haddr =  0xf8130b67 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x0 | Hburst = 0x5 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 25 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# 33-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 35, intf.Hwrite = 0, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 35, intf.Hwrite = 0, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# READ OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 45 | intf.Hrdata = x | memory = 8d3b5fdc85444ff0 | memory without address = '{4161997671:10176833183707058160 } | At slave dummy Haddr = f8130b67 | At slave dummy decimal Haddr = 4161997671
+# ---------------------------------------------------------------------------------
+# Time = 45 | intf.Hrdata = x
+# 11-------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 45, intf.Hwrite = 0, intf.Hready = 1
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# Time = 45 debugging display 622
+# Time = 45 debugging display 722
+# Time = 45 debugging display 822
+# Time = 45 debugging display 922
+# Time = 45 debugging display 1122
+# Time = 45 debugging display 1222
+# Time = 45 debugging display 1322
+# Time = 45 debugging display 1422
+# Time = 45 debugging display 1622
+# ------------------------------------------------------
+# Display Function called from Read Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0xx | Haddr =  0xf8130b67 | Hrdata = 0x8d3b5fdc85444ff0 | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x0 | Hburst = 0x5 | Hresp = 0x0 | Hsel = 0x1 | Hready = 0x1
+# Time = 45 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Outside Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0xx | Haddr =  0xf8130b67 | Hrdata = 0x8d3b5fdc85444ff0 | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x0 | Hburst = 0x5 | Hresp = 0x0 | Hsel = 0x1 | Hready = 0x1
+# Time = 45 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Time = 45 debugging display
+# Time = 45 debugging display 322
+# Time = 45 debugging display 422
+# Time = 45 debugging display 522
+# SANITY TESTCASE IS PASSED
+# ------------------------------------------------------
+# Display Function called from Scoreboard Classs class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0xx | Haddr =  0xf8130b67 | Hrdata = 0x8d3b5fdc85444ff0 | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x0 | Hburst = 0x5 | Hresp = 0x0 | Hsel = 0x1 | Hready = 0x1
+# Time = 45 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Total pass count = 1
+# Total fail count = 0
+# Total transaction count = 2
+# ** Note: $finish    : ../tb_top/ahb5_top.sv(21)
+#    Time: 55 ns  Iteration: 0  Instance: /ahb5_top
+# End time: 16:19:59 on Apr 30,2025, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 2

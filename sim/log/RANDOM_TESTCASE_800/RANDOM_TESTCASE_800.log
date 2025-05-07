@@ -1,0 +1,220 @@
+# vsim -c -assertdebug work.tb_opt "+STRING=2" -sv_seed 800 -l ../sim//./log//RANDOM_TESTCASE_800/RANDOM_TESTCASE_800.log -do "add wave -r /*; run -all" 
+# Start time: 15:34:36 on Apr 29,2025
+# //  Questa Sim
+# //  Version 2021.2_1 linux May 15 2021
+# //
+# //  Copyright 1991-2021 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading sv_std.std
+# Loading work.ahb5_interface(fast)
+# Loading work.ahb5_pkg(fast)
+# Loading work.ahb5_package_sv_unit(fast)
+# Loading work.ahb5_top(fast)
+# Loading work.ahb5_interface(fast__2)
+# Loading work.ahb5_test(fast)
+# ** Warning: (vsim-8441) Clocking block output intf.cb_master.Hwdata is not legal in this
+# or another expression.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_pkg File: ../sv/ahb5_driver.sv Line: 54
+# ** Warning: (vsim-8637) A modport ('ahb5_driver') should not be used in a hierarchical path.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_pkg File: ../sv/ahb5_environment.sv Line: 36
+# ** Warning: (vsim-8637) A modport ('ahb5_monitor') should not be used in a hierarchical path.
+#    Time: 0 ns  Iteration: 0  Region: /ahb5_pkg File: ../sv/ahb5_environment.sv Line: 37
+# add wave -r /*
+#  run -all
+# RANDOM_TESTCASE This testcase is selected
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 0 | Hwdata = 0x5b4728c75bbcf936 | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x1 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 0 | Haddr_mem = '{668564128:668564128 }
+# -------------------------------------------------------
+# Time = 0 Hello
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 5 | Hwdata = 0x5b4728c75bbcf936 | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x1 | Hburst = 0x1 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 5 | Haddr_mem = '{668564128:668564128 }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 9 | Hwdata = 0x9ed68684b47adbbc | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x1 | Hburst = 0x3 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 9 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Time = 9 Hello
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 9 | Hwdata = 0x9ed68684b47adbbc | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x1 | Hburst = 0x3 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 9 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 15 | memory = x | memory without address = '{668564128:x } | At slave dummy Haddr = 27d97aa0 | At slave dummy decimal Haddr = 668564128
+# ---------------------------------------------------------------------------------
+# ../sv/ahb5_generator.sv(36): randomize() failed due to conflicts between the following constraints:
+# 	../sv/ahb5_transaction.sv(30): Address { (Haddr inside { empty_array }); }
+# Given:
+# 	logic [31:0] Haddr
+# ** Note: (vsim-7130) Enabling enhanced debug (-solvefaildebug=2) may generate a more descriptive constraint contradiction report.
+# ** Note: (vsim-7106) Use vsim option '-solvefailtestcase[=filename]' to generate a simplified testcase that will reproduce the failure.
+# ** Warning: (vsim-7084) No solutions exist which satisfy the specified constraints; randomize() failed.
+# 
+#    Time: 18 ns  Iteration: 0  Process: /ahb5_pkg::ahb5_environment::test_run/#FORK#43_f662a9c File: ../sv/ahb5_generator.sv Line: 36
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 18 | Hwdata = 0x9ed68684b47adbbc | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x1 | Hburst = 0x3 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 18 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# Time = 18 Hello
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 18 | Hwdata = 0x9ed68684b47adbbc | Haddr =  0x27d97aa0 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x0 | Hsize = 0x1 | Hburst = 0x3 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 18 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 27 | Hwdata = 0xdde5bd7a6ae7ab2c | Haddr =  0x55a23549 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x0 | Hburst = 0x2 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 27 | Haddr_mem = '{1436693833:1436693833 }
+# -------------------------------------------------------
+# Time = 27 Hello
+# ---------------------------------------------------------------------------------
+# READ OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 35 | memory = x | memory without address = '{668564128:x } | At slave dummy Haddr = 27d97aa0 | At slave dummy decimal Haddr = 668564128
+# ---------------------------------------------------------------------------------
+# 222222222222222222222222222222222Time = 35 | intf.cb_master.Hwdata = dde5bd7a6ae7ab2c
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 35 | Hwdata = 0xdde5bd7a6ae7ab2c | Haddr =  0x55a23549 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x0 | Hburst = 0x2 | Hresp = 0xx | Hsel = 0x0 | Hready = 0xx
+# Time = 35 | Haddr_mem = '{1436693833:1436693833 }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 36 | Hwdata = 0x6a2a8f2f5172d3d | Haddr =  0x175dfdc2 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x1 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 36 | Haddr_mem = '{392035778:392035778, 1436693833:1436693833 }
+# -------------------------------------------------------
+# Time = 36 Hello
+# ------------------------------------------------------
+# Display Function called from Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0xdde5bd7a6ae7ab2c | Haddr =  0x55a23549 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x0 | Hburst = 0x2 | Hresp = 0x0 | Hsel = 0x0 | Hready = 0x1
+# Time = 45 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# 222222222222222222222222222222222Time = 45 | intf.cb_master.Hwdata = 6a2a8f2f5172d3d
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0x6a2a8f2f5172d3d | Haddr =  0x175dfdc2 | Hrdata = 0xx | Htrans = 0x2 | Hwrite = 0x1 | Hsize = 0x1 | Hburst = 0x0 | Hresp = 0xx | Hsel = 0x1 | Hready = 0xx
+# Time = 45 | Haddr_mem = '{392035778:392035778, 1436693833:1436693833 }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Random Testcase class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 45 | Hwdata = 0xdc50c75c2e280b64 | Haddr =  0x1a0a469c | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x3 | Hburst = 0x4 | Hresp = 0xx | Hsel = 0x2 | Hready = 0xx
+# Time = 45 | Haddr_mem = '{392035778:392035778, 436881052:436881052, 1436693833:1436693833 }
+# -------------------------------------------------------
+# Time = 45 Hello
+# ------------------------------------------------------
+# Display Function called from Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 55 | Hwdata = 0x6a2a8f2f5172d3d | Haddr =  0x1a0a469c | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x3 | Hburst = 0x4 | Hresp = 0x0 | Hsel = 0x0 | Hready = 0x1
+# Time = 55 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 55 | memory = 6a2a8f2f5172d3d | memory without address = '{436881052:478130271902182717, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# 222222222222222222222222222222222Time = 55 | intf.cb_master.Hwdata = dc50c75c2e280b64
+# ------------------------------------------------------
+# Display Function called from driver class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 55 | Hwdata = 0xdc50c75c2e280b64 | Haddr =  0x1a0a469c | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x3 | Hburst = 0x4 | Hresp = 0xx | Hsel = 0x2 | Hready = 0xx
+# Time = 55 | Haddr_mem = '{392035778:392035778, 436881052:436881052, 1436693833:1436693833 }
+# -------------------------------------------------------
+# ------------------------------------------------------
+# Display Function called from Monitor class
+# Display the bits of Hwdata = 64 and size of Hwdata = 64
+# Time = 65 | Hwdata = 0xdc50c75c2e280b64 | Haddr =  0x1a0a469c | Hrdata = 0xx | Htrans = 0x1 | Hwrite = 0x1 | Hsize = 0x3 | Hburst = 0x4 | Hresp = 0x0 | Hsel = 0x0 | Hready = 0x1
+# Time = 65 | Haddr_mem = '{ }
+# -------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 75 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 95 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 115 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 135 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 155 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 175 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 195 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 215 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 235 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 255 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 275 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 295 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 315 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 335 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 355 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 375 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 395 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 415 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 435 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 455 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 475 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
+# WRITE OPERATION INSIDE SLAVE DUMMY DRIVER TIme = 495 | memory = dc50c75c2e280b64 | memory without address = '{436881052:15875407885206293348, 668564128:x } | At slave dummy Haddr = 1a0a469c | At slave dummy decimal Haddr = 436881052
+# ---------------------------------------------------------------------------------
+# ** Note: $finish    : ../tb_top/ahb5_top.sv(21)
+#    Time: 500 ns  Iteration: 0  Instance: /ahb5_top
+# End time: 15:34:40 on Apr 29,2025, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 4
