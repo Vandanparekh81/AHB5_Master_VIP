@@ -1,13 +1,15 @@
-import ahb5_pkg::*;
 class ahb5_scoreboard;
    mailbox mon2scb;
-   logic [DATA_WIDTH-1:0] mem [*];
+   bit [DATA_WIDTH-1:0] mem [*];
    int trans_count = 0;
+   int wr_trans_count = 0;
+   int rd_trans_count = 0;
    int pass_count = 0;
    int fail_count = 0;
-
-   function new(mailbox mon2scb);
+   testcase_t testcase;
+   function new(mailbox mon2scb, testcase_t testcase);
      this.mon2scb = mon2scb;
+     this.testcase = testcase;
    endfunction
 
    task main();
@@ -19,20 +21,25 @@ class ahb5_scoreboard;
        if(trans.Hwrite == 1) begin
          mem[trans.Haddr] = trans.Hwdata;
          $display("Memory is Filled with Hwdata");
+         wr_trans_count++;
+
        end
        if(trans.Hwrite == 0) begin
+         rd_trans_count++;
          if(mem[trans.Haddr] == trans.Hrdata) begin
            pass_count++;
-           $display("SANITY TESTCASE IS PASSED");
+           $display("%s IS PASSED", testcase);
          end
          else begin
-           $error("SANITY_TESTCASE IS FAILED");
+           $error("%s IS FAILED", testcase);
            fail_count++;
          end
        end
        trans.display("Scoreboard Classs");
        $display("Total pass count = %0d", pass_count);
        $display("Total fail count = %0d", fail_count);
+       $display("Total write count = %0d", wr_trans_count);
+       $display("Total read count = %0d", rd_trans_count);
        $display("Total transaction count = %0d", trans_count);
 
      end      

@@ -1,65 +1,81 @@
-import ahb5_pkg::*;
 class ahb5_monitor;
-  mailbox mon2scb;
-  event event_a;
-  //virtual ahb5_interface.ahb5_monitor intf;
-  virtual ahb5_interface intf;
+  mailbox mon2scb; //Mailbox For Monitor and Scoreboard component
+  event event_a; 
+  int trans_count = 0;
+  logic curr_write; 
+  logic [ADDR_WIDTH-1 : 0] curr_addr;
+  logic next_write; 
+  int wr_trans_count = 0;
+  int rd_trans_count = 0;
+  logic [ADDR_WIDTH-1 : 0] next_addr;
+  virtual ahb5_interface intf; //Interface
 
-
-  /*function new(mailbox mon2scb, virtual ahb5_interface.ahb5_monitor intf, event event_a);
-          this.mon2scb = mon2scb;
-          this.intf = intf;
-          this.event_a = event_a;
-  endfunction*/
-
-  function new(mailbox mon2scb, virtual ahb5_interface intf, event event_a);
+  //Constructor of monitor 
+  function new(mailbox mon2scb, virtual ahb5_interface intf, event event_a); 
           this.mon2scb = mon2scb;
           this.intf = intf;
           this.event_a = event_a;
   endfunction
 
+  // Main task of monitor
   task main();
     forever begin
-      ahb5_transaction trans;
-      trans = new();
-      $display("Time = %0t debugging display", $time);
-      //@(posedge intf.Hclk);
-      @(negedge intf.Hclk);
-      trans.Haddr = intf.Haddr;
-      $display("Time = %0t debugging display 622", $time);
-      trans.Htrans = intf.Htrans;
-      $display("Time = %0t debugging display 722", $time);
-      trans.Hwrite = intf.Hwrite;
-      $display("Time = %0t debugging display 822", $time);
-      trans.Hsize = intf.Hsize;
-      $display("Time = %0t debugging display 922", $time);
-      trans.Hburst = intf.Hburst;
-      $display("Time = %0t debugging display 1122", $time);
-      trans.Hresp = intf.Hresp;
-      $display("Time = %0t debugging display 1222", $time);
-      trans.Hsel = intf.Hsel;
-      $display("Time = %0t debugging display 1322", $time);
-      trans.Hready = intf.Hready;
-      $display("Time = %0t debugging display 1422", $time);
-      if(intf.Hwrite == 1) begin
-        $display("Time = %0t debugging display 1522", $time);
+      //$display("Time = %0t debugging display 1522", $time);
+      if(intf.HResetn) begin // Reset Condition 
+        ahb5_transaction trans;
+        trans = new();
+        if(trans_count == 0) begin
+          @(negedge intf.Hclk);
+          curr_write = intf.Hwrite;
+          curr_addr = intf.Haddr;
+          trans.Haddr = intf.Haddr;
+          trans.Hwrite = intf.Hwrite;
+          trans.Hready = intf.Hready;
+          trans.Hburst = intf.Hburst;
+          trans.Htrans = intf.Htrans;
+          trans.Hsize = intf.Hsize;
+          trans.Hresp = intf.Hresp;
+          trans.Hsel = intf.Hsel;
+        end
+
+        else begin
+          curr_write = next_write;
+          curr_addr = next_addr;
+          trans.Haddr = next_addr;
+          trans.Hwrite = next_write;
+          trans.Hready = intf.Hready;
+          trans.Hburst = intf.Hburst;
+          trans.Htrans = intf.Htrans;
+          trans.Hsize = intf.Hsize;
+          trans.Hresp = intf.Hresp;
+          trans.Hsel = intf.Hsel;      
+        end
         @(negedge intf.Hclk);
-        trans.Hwdata = intf.Hwdata;
-        trans.display("Write Monitor");
+        if(curr_write) begin
+          trans.Hwdata = intf.Hwdata;
+          next_addr = intf.Haddr;
+          next_write = intf.Hwrite;
+          $display("Next addr = %0h | Next write = %0h ", next_addr, next_write);
+          trans_count++;
+          wr_trans_count++;
+          mon2scb.put(trans);
+          trans.display("Write Monitor");
+        end
+        if(curr_write == 0) begin
+          @(posedge intf.Hclk);
+          trans.Hrdata = intf.Hrdata;
+          next_addr = intf.Haddr;
+          next_write = intf.Hwrite;
+          $display("Next addr = %0h | Next write = %0h ", next_addr, next_write);
+          trans_count++;
+          rd_trans_count++;
+          mon2scb.put(trans);
+          trans.display("Read Monitor");
+        end
       end
-      else begin 
-        $display("Time = %0t debugging display 1622", $time);
-        @(negedge intf.Hclk);
-        trans.Hrdata = intf.Hrdata;
-        trans.display("Read Monitor");
+      else begin
+        wait(intf.HResetn);
       end
-      $display("[%0t] Debugging Display 111 of Monitor ", $time);
-      trans.display("Outside Monitor");
-      $display("[%0t] Debugging Display 222 of Monitor ", $time);
-      mon2scb.put(trans);
-      $display("[%0t] Debugging Display 333 of Monitor ", $time);
-      ->event_a; 
-      $display("[%0t] Debugging Display 444 of Monitor ", $time);
-      end
+    end
   endtask
 endclass      

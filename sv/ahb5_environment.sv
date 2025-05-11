@@ -1,14 +1,6 @@
-/*`include "ahb5_configure.sv"
-`include "ahb5_transaction.sv"
-`include "ahb5_generator.sv"
-`include "ahb5_driver.sv"
-`include "ahb5_monitor.sv"
-`include "ahb5_scoreboard.sv"
-`include "../sve/ahb5_slave_dummy_driver.sv"*/
-
-import ahb5_pkg::*;
 class ahb5_environment;
   int addr_width, data_width;
+  //ahb5_configure cfg;
   ahb5_generator gen;
   ahb5_driver drv;
   ahb5_transaction trans;
@@ -21,6 +13,7 @@ class ahb5_environment;
   int no_of_wr;
   int no_of_rd;
   event event_a;
+  event reset_deasserted;
   int no_of_random;
 
 
@@ -32,10 +25,11 @@ class ahb5_environment;
     this.intf = intf;
     gen2drv = new(1);
     mon2scb = new(1);
-    gen = new(gen2drv, no_of_wr, no_of_rd, no_of_random, testcase, event_a);
-    drv = new(gen2drv, intf.ahb5_driver);
+    //cfg = new();
+    gen = new(gen2drv, no_of_wr, no_of_rd, no_of_random, testcase, reset_deasserted);
+    drv = new(gen2drv, intf.ahb5_driver, reset_deasserted);
     mon = new(mon2scb, intf, event_a);
-    scb = new(mon2scb);
+    scb = new(mon2scb, testcase);
   endfunction
 
   task test_run();
@@ -44,7 +38,12 @@ class ahb5_environment;
       drv.main();
       mon.main();
       scb.main();
-    join
+    join_any
+    $display("[%0t] VANDAN Generator is ended",$time);
+    repeat(2) begin
+      @(negedge intf.Hclk);
+    end
+    $finish;
   endtask
 
 endclass
