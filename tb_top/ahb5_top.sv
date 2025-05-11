@@ -1,32 +1,19 @@
-import ahb5_pkg::*;
+import AT_ahb5_pkg_p::*;
 
-module ahb5_top;
-  logic Hclk, HResetn;
-  event_f event_finish;
+//Top module include test, interface and global signals and pass global signals to interface 
+module AT_ahb5_top_m;
+  //Declaration of global signals and test instance and interface instance
+  logic AT_Hclk_l, AT_HResetn_l; //Global Signals
+  AT_ahb5_interface_i intf(AT_Hclk_l, AT_HResetn_l); //Passing global signals to interface
+  AT_ahb5_test_p tst(intf); //passing interface to test
+  initial forever #5 AT_Hclk_l = ~AT_Hclk_l; //Driving the clock 
 
-
-  ahb5_interface intf(Hclk, HResetn);
-  ahb5_test tst(intf);
-  initial forever #5 Hclk = ~Hclk;
-
-
+//Initialize global signals
   initial begin 
-    Hclk = 0;
-    HResetn = 0;
+    AT_Hclk_l = 0;
+    AT_HResetn_l = 0;
     $display("[%0t] Reset is Initiated",$time);
-    // HResetn = 1;
-    #10 HResetn = 1;
+    #10 AT_HResetn_l = 1;
     $display("[%0t] Reset is Deasserted",$time);
-    // #50 HResetn = 0;
-    $display("[%0t] Reset is Initiated",$time);
-    #10 HResetn = 1;
-    $display("[%0t] Reset is Deasserted",$time);
-    //$dumpfile("AHB5_Wave.vcd");
-    //$dumpvars(0,ahb5_top);
   end
-
-  /*initial begin
-    @(event_finish);
-    $finish;
-  end*/
 endmodule
