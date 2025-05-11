@@ -1,15 +1,17 @@
-//`include "../sv/ahb5_environment.sv"
 import ahb5_pkg::*;
 program ahb5_test(ahb5_interface intf);
   testcase_t testcase;
   int no_of_wr=5;
   int no_of_rd=5;
   int no_of_random=6;
+  string testcase_str;
   ahb5_environment env;
   ahb5_slave_dummy_driver dum_drv;
   initial begin
-    if($value$plusargs ("STRING=%s", testcase))
-            $display("%s This testcase is selected", testcase);
+          if(!$value$plusargs ("STRING=%s", testcase)) begin
+            testcase = SANITY_TESTCASE;
+            $display("Default Testcase is SANITY_TESTCASE");
+          end
   end
   initial begin
     env = new(intf, no_of_wr, no_of_rd, no_of_random, testcase);    
