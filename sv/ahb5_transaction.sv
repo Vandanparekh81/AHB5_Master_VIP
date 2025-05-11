@@ -1,52 +1,56 @@
-class ahb5_transaction;
-   //typedef enum logic [1:0] {IDLE = 2'b00, BUSY = 2'b01, NONSEQ = 2'b10, SEQ = 2'b11} htrans_t; 
-   //typedef enum logic [2:0] {SINGLE = 3'b000, INCR = 3'b001, WRAP4 = 3'b010, INCR4 = 3'b011, WRAP8 = 3'b100, INCR8 = 3'b101, WRAP16 = 3'b110, INCR16 = 3'b111} hburst_t;                          
-   //typedef enum logic [2:0] {BYTE = 3'b000, HALFWORD = 3'b001, WORD = 3'b010, DOUBLEWORD = 3'b011, FOURWORD = 3'b100, EIGHTWORD = 3'b101, SIXTEENWORD = 3'b110, THIRTYTWOWORD = 3'b111} hsize_t; 
-  rand int wr_count;
-  rand int rd_count;
-  rand logic [DATA_WIDTH-1 : 0] Hwdata;
-  rand logic [ADDR_WIDTH-1 : 0] Haddr;
-  logic [DATA_WIDTH-1 : 0] Hrdata;
-  rand logic [1:0] Htrans;
-  logic Hwrite;
-  rand logic [2:0] Hsize;
-  rand logic [2:0] Hburst;
-  logic Hresp;
-  rand logic [1:0] Hsel;
-  logic Hready;
-  rand int burst_beat_length;
-  mem Haddr_mem;
-  testcase_t testcase;
+//transaction class contains that signals which can be transfered between components  
+class AT_ahb5_transaction_c;
+  rand int AT_wr_count_i; // Write transaction count
+  rand int AT_rd_count_i; // Read transaction count 
+  rand logic [DATA_WIDTH-1 : 0] AT_Hwdata_l; // Write data of AHB5  
+  rand logic [ADDR_WIDTH-1 : 0] AT_Haddr_l; //  Address of AHB5 
+  logic [DATA_WIDTH-1 : 0] AT_Hrdata_l; // Read data of AHB5
+  rand logic [1:0] AT_Htrans_l; // Transfer mode of AHB5 00 = IDLE, 01 = BUSY, 10 = NONSEQ, 11 = SEQ 
+  logic AT_Hwrite_l; //Write or Read Signal When it is 1 then it indicate write operation and when it is 0 then it indicate Read operation
+  rand logic [2:0] AT_Hsize_l; //Size of data transfer BYTE = 3'b000, HALFWORD = 3'b001, WORD = 3'b010, DOUBLEWORD = 3'b011, FOURWORD = 3'b100, EIGHTWORD = 3'b101, SIXTEENWORD = 3'b110, THIRTYTWOWORD = 3'b111
+  rand logic [2:0] AT_Hburst_l; // This signal indicate burst transfer SINGLE = 3'b000, INCR = 3'b001, WRAP4 = 3'b010, INCR4 = 3'b011, WRAP8 = 3'b100, INCR8 = 3'b101, WRAP16 = 3'b110, INCR16 = 3'b111
+  logic AT_Hresp_l; // This signal indicate response of slave if it is 0 then it indicate OKAY response if it is 1 Then it indicate ERROR Response
+  rand logic [1:0] AT_Hsel_l; // This signal decide which slave activate at a time
+  logic AT_Hready_l; // This signal indicate slave is ready or not ready for transfer , When it is 1 slave is ready for transfer and it is 0 slave is not ready transfer
+  rand int AT_burst_beat_length_i; // This signal depend on Hburst signal when Hburst is single AT_burst_beat_length_i is 1 and when Hburst is INCRthen AT_burst_beat_length_i is undefined length burst and Hbusrt is INCR4 | WRAP4 then AT_burst_beat_length_i is 4 and Hburst is INCR8 | WRAP8 then AT_burst_beat_length_i is 8 and When Hburst is INCR16 | WRAP16 then AT_burst_beat_length_i is 16
+  mem AT_Haddr_mem_t; // Dummy Memory , This memory is used for storing address so we can use that same for address in read operation
+  testcase_t AT_testcase_te; // this signal indicate which testcase is selected
 
   
- //constraint valid_data {Hwdata >= 0 && Hwdata <= (2**DATA_WIDTH)-1; Hrdata >= 0 && Hrdata <= (2**DATA_WIDTH)-1;}
- //constraint valid_addr {Haddr >= 0 && Haddr <= (2**ADDR_WIDTH)-1;}
- //constraint valid_data_ic{if((Haddr >= 0) && Haddr <= (((2**DATA_WIDTH)/3) - 1)) Hsel == 2'b00;
-                          //if((Haddr >= ((2**DATA_WIDTH)/3)) && (Haddr <=  ((((2**DATA_WIDTH)/3)+ ((2**DATA_WIDTH)/3))-1))) Hsel == 2'b01;
-                          //if((Haddr >= (((2**DATA_WIDTH)/3)+ ((2**DATA_WIDTH)/3))) && (Haddr <= ((2**DATA_WIDTH)- 1))) Hsel == 2'b10;
+ //constraint valid_data {AT_Hwdata_l >= 0 && AT_Hwdata_l <= (2**DATA_WIDTH)-1; AT_Hrdata_l >= 0 && AT_Hrdata_l <= (2**DATA_WIDTH)-1;}
+ //constraint valid_addr {AT_Haddr_l >= 0 && AT_Haddr_l <= (2**ADDR_WIDTH)-1;}
+ //constraint valid_data_ic{if((AT_Haddr_l >= 0) && AT_Haddr_l <= (((2**DATA_WIDTH)/3) - 1)) Hsel == 2'b00;
+                          //if((AT_Haddr_l >= ((2**DATA_WIDTH)/3)) && (AT_Haddr_l <=  ((((2**DATA_WIDTH)/3)+ ((2**DATA_WIDTH)/3))-1))) Hsel == 2'b01;
+                          //if((AT_Haddr_l >= (((2**DATA_WIDTH)/3)+ ((2**DATA_WIDTH)/3))) && (AT_Haddr_l <= ((2**DATA_WIDTH)- 1))) Hsel == 2'b10;
                          //}
-  //constraint HWrite {if(testcase == WRITE_TEST) Hwrite == 1; if(testcase == READ_TEST) Hwrite == 0; }
-  constraint Htrans_state{Htrans == 2;}
-  constraint Address {Hwrite -> !(Haddr inside {Haddr_mem}); !Hwrite -> (Haddr inside {Haddr_mem}); }
-  constraint single_Hburst {Hburst == 0;}
-  constraint HSelect {Hsel inside {0,1,2};}
-  constraint burst_beats_length {if(Hsize  == 3'b000) burst_beat_length == 1; if(Hsize == 3'b001) burst_beat_length inside {[1:16]}; if(Hsize == 3'b010 || Hsize == 3'b011) burst_beat_length == 4; if(Hsize == 3'b100 || Hsize == 3'b101) burst_beat_length == 8; if(Hsize == 3'b110 || Hsize == 3'b111) burst_beat_length == 16;}
-  function void post_randomize();
-    if(Hwrite)
-      Haddr_mem[Haddr] = Haddr;
+  constraint AT_Htrans_state_c{AT_Htrans_l == 2;} // This Constraint written for valid Htrans
+
+  constraint AT_Address_c {AT_Hwrite_l -> !(AT_Haddr_l inside {AT_Haddr_mem_t}); !AT_Hwrite_l -> (AT_Haddr_l inside {AT_Haddr_mem_t}); } // This constraint take unique address for write operation and take that same adress for read operation using dummy memory
+
+  constraint AT_single_Hburst_c {AT_Hburst_l == 0;} // this constraint select only single busrst mode
+
+  constraint AT_HSelect_c {AT_Hsel_l == 0;} // Currently using only one slave so Hsel equal to 0 means only one slave
+
+  constraint AT_burst_beats_length_c {if(AT_Hsize_l  == 3'b000) AT_burst_beat_length_i == 1; if(AT_Hsize_l == 3'b001) AT_burst_beat_length_i inside {[1:16]}; if(AT_Hsize_l == 3'b010 || AT_Hsize_l == 3'b011) AT_burst_beat_length_i == 4; if(AT_Hsize_l == 3'b100 || AT_Hsize_l == 3'b101) AT_burst_beat_length_i == 8; if(AT_Hsize_l == 3'b110 || AT_Hsize_l == 3'b111) AT_burst_beat_length_i == 16;} // This constraint is show that how the value of AT_burst_beat_length_i depend on Hburst
+
+  //This function is written to save unique address into memory which is generated during write operation and it is deleted from memory during read operation  
+  function void post_randomize(); //This post_randomize function which called automatically after randomization
+    if(AT_Hwrite_l)
+      AT_Haddr_mem_t[AT_Haddr_l] = AT_Haddr_l; // This statement indicate that if AT_Hwrite_l is high then we have to store address into memory
     else
-      Haddr_mem.delete(Haddr);
+      AT_Haddr_mem_t.delete(AT_Haddr_l); //This statement indicate that if AT_Hwrite_l is low then we have to delete the address from memory
   endfunction
           
   /*function new(testcase_t testcase);
           this.testcase = testcase;
   endfunction*/
-  task display(string name);
+
+  // Display task , This reusable task it is called from all components
+  task AT_display_t(string name);
     $display("------------------------------------------------------");
     $display("Display Function called from %s class", name);
-    $display("Display the bits of Hwdata = %0d and size of Hwdata = %0d", $bits(Hwdata), $size(Hwdata));
-    $display("Time = %0t | Hwdata = 0x%0h | Haddr =  0x%0h | Hrdata = 0x%0h | Htrans = 0x%0h | Hwrite = 0x%0h | Hsize = 0x%0h | Hburst = 0x%0h | Hresp = 0x%0h | Hsel = 0x%0h | Hready = 0x%0h", $time,Hwdata,Haddr,Hrdata,Htrans,Hwrite,Hsize,Hburst,Hresp,Hsel,Hready);
-    $display("Time = %0t | Haddr_mem = %p", $time, Haddr_mem);
+    $display("Time = %0t | AT_Hwdata_l = 0x%0h | AT_Haddr_l =  0x%0h | AT_Hrdata_l = 0x%0h | AT_Htrans_l = 0x%0h | AT_Hwrite_l = 0x%0h | AT_Hsize_l = 0x%0h | AT_Hburst_l = 0x%0h | AT_Hresp_l = 0x%0h | AT_Hsel_l = 0x%0h | AT_Hready_l = 0x%0h", $time,AT_Hwdata_l,AT_Haddr_l,AT_Hrdata_l,AT_Htrans_l,AT_Hwrite_l,AT_Hsize_l,AT_Hburst_l,AT_Hresp_l,AT_Hsel_l,AT_Hready_l);
+    $display("Time = %0t | AT_Haddr_mem_t = %p", $time, AT_Haddr_mem_t);
     $display("-------------------------------------------------------");
   endtask
 
