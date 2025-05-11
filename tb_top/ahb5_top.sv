@@ -1,10 +1,9 @@
-//`include "../sv/ahb5_Interface.sv"
-//`include "../sve/ahb5_test.sv"
-
 import ahb5_pkg::*;
 
 module ahb5_top;
   logic Hclk, HResetn;
+  event_f event_finish;
+
 
   ahb5_interface intf(Hclk, HResetn);
   ahb5_test tst(intf);
@@ -13,14 +12,21 @@ module ahb5_top;
 
   initial begin 
     Hclk = 0;
-    HResetn = 1;
-    //#100 HResetn = 0;
+    HResetn = 0;
+    $display("[%0t] Reset is Initiated",$time);
+    // HResetn = 1;
+    #10 HResetn = 1;
+    $display("[%0t] Reset is Deasserted",$time);
+    // #50 HResetn = 0;
+    $display("[%0t] Reset is Initiated",$time);
+    #10 HResetn = 1;
+    $display("[%0t] Reset is Deasserted",$time);
     //$dumpfile("AHB5_Wave.vcd");
     //$dumpvars(0,ahb5_top);
   end
 
-  initial begin
-    #240;
+  /*initial begin
+    @(event_finish);
     $finish;
-  end
+  end*/
 endmodule
