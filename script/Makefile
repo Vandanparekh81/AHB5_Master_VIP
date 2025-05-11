@@ -41,7 +41,6 @@ compile:
 sim:
 	@vopt work.ahb5_top -o tb_opt +acc=arn
 	#@vsim -c  -assertdebug work.tb_opt -l ahb_m.log -do "add wave -r /*; run -all"
-	#@mv -f $(log) ../sim/
 ifeq ($(WAVES),1)
 	#vsim -c -assertdebug work.tb_opt -sv_seed $(SEED) -l $(SIM_DIR)/test_name_$(SEED).log -do "add wave -r /*; run -all"
 	mkdir -p $(SIM_DIR)$(LOG)
@@ -59,5 +58,5 @@ ifeq ($(WAVES),1)
 	@mv $(wlf) $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).wlf
 endif
 clean:
+	@rm -rf $(WORK)	#@mv -f $(log) ../sim/
 	@rm -rf $(WORK)
-	
