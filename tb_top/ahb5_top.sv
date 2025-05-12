@@ -8,7 +8,7 @@ module AT_ahb5_top_m;
   AT_ahb5_test_p tst(intf); //passing interface to test
   initial forever #5 AT_Hclk_l = ~AT_Hclk_l; //Driving the clock 
 
-//Initialize global signals
+//Driving global signals
   initial begin 
     AT_Hclk_l = 0;
     AT_HResetn_l = 0;
