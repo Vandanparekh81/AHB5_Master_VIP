@@ -2,7 +2,6 @@
 class AT_ahb5_generator_c;
   //Declarations of generator class signals
   mailbox AT_gen2drv_m; // Mailbox between generator and driver
-  //ahb5_configure cfg;
   int AT_no_of_wr_i; // No of write transactions
   int AT_no_of_rd_i; //No of read transactions
   int AT_no_of_random_i; //No of Random read and write transactions

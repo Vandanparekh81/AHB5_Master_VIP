@@ -29,7 +29,7 @@ class AT_ahb5_transaction_c;
 
   constraint AT_single_Hburst_c {AT_Hburst_l == 0;} // this constraint select only single busrst mode
 
-  constraint AT_HSelect_c {AT_Hsel_l == 0;} // Currently using only one slave so Hsel equal to 0 means only one slave
+  constraint AT_HSelect_c {AT_Hsel_l == 1;} // Currently using only one slave so Hsel equal to 0 means only one slave
 
   constraint AT_burst_beats_length_c {if(AT_Hsize_l  == 3'b000) AT_burst_beat_length_i == 1; if(AT_Hsize_l == 3'b001) AT_burst_beat_length_i inside {[1:16]}; if(AT_Hsize_l == 3'b010 || AT_Hsize_l == 3'b011) AT_burst_beat_length_i == 4; if(AT_Hsize_l == 3'b100 || AT_Hsize_l == 3'b101) AT_burst_beat_length_i == 8; if(AT_Hsize_l == 3'b110 || AT_Hsize_l == 3'b111) AT_burst_beat_length_i == 16;} // This constraint is show that how the value of AT_burst_beat_length_i depend on Hburst
 
@@ -44,6 +44,7 @@ class AT_ahb5_transaction_c;
   /*function new(testcase_t testcase);
           this.testcase = testcase;
   endfunction*/
+
 
   // Display task , This reusable task it is called from all components
   task AT_display_t(string name);
