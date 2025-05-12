@@ -7,13 +7,22 @@ path += ../sv/ahb5_package.sv
 SIM_DIR = ../sim/
 
 # Log directories
-Log = /log/
+Log = log/
 
 # Top Module name
 TOP_MODULE = AT_ahb5_top_m
 
 # Default testcase if not passed externally
 override TEST_NAME ?=0
+
+# Default Value of number of write transactions if not passed externally
+override NO_OF_WR ?=1
+
+# Default Value of number of read transactions if not passed externally
+override NO_OF_RD ?=1
+
+# Default Value of number of random transactions if not passed externally
+override NO_OF_RANDOM ?=5
 
 # Work directory
 WORK += ../script/work
@@ -58,12 +67,12 @@ ifeq ($(WAVES),1)
         # Create directories for log and waveform
 	mkdir -p $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)
 	# Run with GUI Wave capture
-	vsim -c -assertdebug work.tb_opt +STRING=$(TEST_NAME) -sv_seed $(SEED) -l $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "add wave -r /*; run -all"
+	vsim -c -assertdebug -msgmode both work.tb_opt +STRING=$(TEST_NAME) +NO_OF_WRITE=$(NO_OF_WR) +NO_OF_READ=$(NO_OF_RD) +NO_OF_RANDOM=$(NO_OF_RANDOM) -sv_seed $(SEED) -l $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "add wave -r /*; run -all"
 else
         # Create directories for log and waveform
 	mkdir -p $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)
 	# Run without GUI Wave capture
-	vsim -c -assertdebug work.tb_opt +STRING=$(TEST_NAME) -sv_seed $(SEED) -l $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "run -all"
+	vsim -c -assertdebug work.tb_opt +STRING=$(TEST_NAME) +NO_OF_WRITE=$(NO_OF_WR) +NO_OF_READ=$(NO_OF_RD) +NO_OF_RANDOM=$(NO_OF_RANDOM) -sv_seed $(SEED) -l $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).log -do "run -all"
 endif
 
 # Move wavefiles to appropriate folder
