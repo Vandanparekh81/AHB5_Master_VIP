@@ -81,6 +81,15 @@ ifeq ($(WAVES),1)
 	@mv $(wlf) $(SIM_DIR)/$(Log)/$(DIRECTORY)_$(SEED)/$(DIRECTORY)_$(SEED).wlf
 endif
 
-# Clean Work Directoey
+# Cleaning Work Directory
 clean:
 	@rm -rf $(WORK)
+
+# Cleaning particular log	
+clean_log:
+	@rm -rf $(SIM_DIR)$(Log)$(DIRECTORY)_$(SEED)
+
+#Cleaning all log
+clean_all_log:
+	@rm -rf $(SIM_DIR)$(Log)/*
+
