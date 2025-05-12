@@ -25,7 +25,6 @@ class AT_ahb5_slave_dummy_driver_c;
         fork
 
           begin // Thread 1 for driving Hready signal
-            $display("[%0t] when reset become 1 then slave driver is activated",$time);
             intf.AT_Hready_l <= 1; // drive hready signal
           end
 
@@ -51,7 +50,6 @@ class AT_ahb5_slave_dummy_driver_c;
                     AT_trans_count_i++; //incremet in transaction count
                     AT_wr_trans_count_i++;  //Increment in write count
 
-                    $display("Time = %0t | total transaction count = %0d", $time,AT_trans_count_i);
             end
             if(AT_curr_write_l == 0) begin //When curr_write = 0 then it take data form associative array and give to the interface
                     intf.AT_Hrdata_l <= AT_mem_b[AT_curr_addr_l];
@@ -59,7 +57,6 @@ class AT_ahb5_slave_dummy_driver_c;
                     AT_next_write_l = intf.AT_Hwrite_l;
                     AT_trans_count_i++; //Increment in transaction count
                     AT_rd_trans_count_i++;  //Increment in read count
-                    $display("Time = %0t | total transaction count = %0d", $time,AT_trans_count_i);
                     $display("Read operation on slave dummy | Time = %0t | AT_curr_addr_l = %0d in decimal | AT_curr_addr_l = %0h in hexadecimal | read_data = %0d in decimal | read_data = %0h in Hexadecimal", $time, AT_curr_addr_l,AT_curr_addr_l,AT_mem_b[AT_curr_addr_l],AT_mem_b[AT_curr_addr_l]);
             end
           end
